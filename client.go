@@ -19,7 +19,7 @@ import (
 	"github.com/wechatpay-apiv3/wechatpay-go/utils"
 )
 
-type WechatPay struct {
+type Client struct {
 	client      *core.Client
 	AppId       string `description:"应用ID"`
 	MchID       string `description:"商户号"`
@@ -38,10 +38,10 @@ func NewWechatPay(
 	mchCertificateSerialNumber string,
 	mchPrivateKeyPath string,
 ) (
-	client *WechatPay,
+	client *Client,
 	err error,
 ) {
-	client = &WechatPay{
+	client = &Client{
 		AppId:       appId,
 		MchID:       mchID,
 		MchAPIv3Key: mchAPIv3Key,
@@ -66,7 +66,7 @@ func NewWechatPay(
 }
 
 // ParseNotifyRequest 解释响应请求
-func (s *WechatPay) ParseNotifyRequest(
+func (s *Client) ParseNotifyRequest(
 	ctx context.Context,
 	request *http.Request,
 ) (
@@ -99,7 +99,7 @@ func (s *WechatPay) ParseNotifyRequest(
 }
 
 // Prepay 创建订单获取订单预备号
-func (s *WechatPay) Prepay(
+func (s *Client) Prepay(
 	ctx context.Context,
 	req app.PrepayRequest,
 ) (
@@ -121,7 +121,7 @@ func (s *WechatPay) Prepay(
 }
 
 // Sign 加密
-func (s *WechatPay) Sign(
+func (s *Client) Sign(
 	ctx context.Context,
 	timestamp string,
 	nonceStr string,
@@ -145,7 +145,7 @@ func (s *WechatPay) Sign(
 }
 
 // Bill 加密
-func (s *WechatPay) Bill(
+func (s *Client) Bill(
 	ctx context.Context,
 	date string,
 	filePath string,
@@ -197,7 +197,7 @@ func (s *WechatPay) Bill(
 }
 
 // CloseOrder 关闭订单
-func (s *WechatPay) CloseOrder(
+func (s *Client) CloseOrder(
 	ctx context.Context,
 	outTradeNo string,
 ) (
@@ -219,7 +219,7 @@ func (s *WechatPay) CloseOrder(
 }
 
 // QueryOrderByOutTradeNo 查询订单
-func (s *WechatPay) QueryOrderByOutTradeNo(
+func (s *Client) QueryOrderByOutTradeNo(
 	ctx context.Context,
 	outTradeNo string,
 ) (
