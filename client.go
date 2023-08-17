@@ -30,7 +30,7 @@ type billDownInfo struct {
 	DownloadUrl string `json:"download_url" description:"下载地址"`
 }
 
-func NewWechatPay(
+func NewClient(
 	ctx context.Context,
 	appId,
 	mchID,
