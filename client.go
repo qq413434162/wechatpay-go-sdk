@@ -107,6 +107,9 @@ func (s *Client) Prepay(
 	err error,
 ) {
 	svc := app.AppApiService{Client: s.client}
+	// 自动填入无需外部再一次填入
+	req.Appid = core.String(s.AppId)
+	req.Mchid = core.String(s.MchID)
 	resp, _, err := svc.Prepay(ctx,
 		req,
 	)
@@ -133,7 +136,6 @@ func (s *Client) Sign(
 	var signStr = s.AppId + "\n" +
 		timestamp + "\n" +
 		nonceStr + "\n" +
-		prepayId + "\n" +
 		prepayId + "\n" +
 		""
 	sign, err := s.client.Sign(ctx, signStr)
