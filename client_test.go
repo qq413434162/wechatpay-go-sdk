@@ -16,7 +16,7 @@ const (
 
 func TestWechatPay_Bill(t *testing.T) {
 	Convey("Test WechatPay Bill", t, func() {
-		u, err := NewWechatPay(
+		u, err := NewClient(
 			context.TODO(),
 			AppId,
 			MchID,
